@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
 
     var c = 0
     var lc = 0
+    var timer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +21,27 @@ class MainActivity : AppCompatActivity() {
         linearlayout_main.setOnClickListener({click()})
 
 
+        val COUNTER = object : Thread() {
+            override fun run() {
 
+                while (!isInterrupted) {
+                    try {
+                        //Counter frequence (in miliseconds)
+                        Thread.sleep(1000)
+                        runOnUiThread {
+                            timer.seconds += 1
+                            tv_seconds.text = timer.seconds.toString()
+                        }
+                    } catch (e: InterruptedException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }
+        COUNTER.start()
     }
+
+
 
     fun click(){
         Toast.makeText(this, "Clicked! " + c, Toast.LENGTH_SHORT).show()
