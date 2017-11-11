@@ -1,43 +1,25 @@
 package com.komnacki.yourcounter
 
+import android.os.Handler
 
 
 class Timer{
-    var hours = 0
-    var minutes = 0
-    var seconds = 0
-    var miliseconds = 0
+
+    var time: Time = Time()
     var isRun = false
 
-    fun add(miliseconds:Int){
-        this.miliseconds += miliseconds
-        update()
-    }
+    val TIME_PERIOD = 100
+
 
     fun reset(){
-        this.hours = 0
-        this.minutes = 0
-        this.seconds = 0
-        this.miliseconds = 0
-        isRun = false
+        time.reset()
     }
 
-    private fun update(){
-        if(miliseconds>999){
-            miliseconds = 0
-            seconds += 1
-        }
 
-        if(seconds > 59){
-            seconds = 0
-            minutes += 1
-        }
 
-        if(minutes > 59){
-            minutes = 0
-            hours += 1
-        }
-    }
+
+
+
 
 
 
